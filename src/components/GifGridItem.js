@@ -7,4 +7,6 @@ export const GifGridItem = ({title,url}) => {
         <p>{title}</p>
     </div>
   )
-}
+};
+
+
