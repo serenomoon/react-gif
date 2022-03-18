@@ -4,7 +4,12 @@ exports[`<GifGridItem.js /> Testing Debe mostrar el snapshot correctamente 1`] =
 <div
   className="card animate__animated animate__fadeIn"
 >
-  <img />
-  <p />
+  <img
+    alt="Hola soy Aldo"
+    src="http://hola.com/soyaldo.jpg"
+  />
+  <p>
+    Hola soy Aldo
+  </p>
 </div>
 `;
