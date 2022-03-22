@@ -6,8 +6,13 @@ import { CategoryAdd } from '../../components/CategoryAdd';
 
 describe('Pruebas en <CategoryAdd />', () => {
     
-    const setCategories = () => {};
-    const wrapper = shallow(<CategoryAdd setCategories={setCategories}/>);
+    const setCategory = jest.fn(); //simula ser una funcion
+    let wrapper = shallow(<CategoryAdd setCategory={setCategory}/>);
+
+    beforeEach( () => {
+        jest.clearAllMocks();
+        wrapper = shallow(<CategoryAdd setCategory={setCategory}/>);
+    })
 
     test('debe de mostrarse correctamente', () => {
         
@@ -28,4 +33,29 @@ describe('Pruebas en <CategoryAdd />', () => {
 
     });
 
+
+    test('No debe postear la informacion con submit', () => {
+        
+        wrapper.find('form').simulate('submit', { preventDefault(){} });
+
+        expect( setCategory ).not.toHaveBeenCalled();
+
+    });
+
+
+    test('Debe llamar el setCategory y limpiar la caja de texto', () => {
+        
+        const value = 'Hola Mundo';
+        
+        wrapper.find('input').simulate('change' , { target: { value } });
+
+        wrapper.find('form').simulate('submit', { preventDefault(){} });
+        
+        expect( setCategory ).toHaveBeenCalled();
+        expect( setCategory ).toHaveBeenCalledTimes(1);
+        expect( setCategory ).toHaveBeenCalledWith( expect.any(Function));
+
+        expect( wrapper.find('input').prop('value')).toBe('');
+
+    });
 });
